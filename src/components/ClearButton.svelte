@@ -1,8 +1,8 @@
 <script>
-    import { frames, currentFrame } from '../js/stores'
+    import { frames, currentFrame, totalPixels } from '../js/stores'
 
     const clear = () => {
-        frames.update(f => {f[$currentFrame] = Array.from(Array(900).keys()); return f})
+        frames.update(f => {f[$currentFrame] = Array.from(Array($totalPixels).keys()); return f})
     }
 </script>
 

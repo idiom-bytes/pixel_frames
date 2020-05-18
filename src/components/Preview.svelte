@@ -1,15 +1,20 @@
 <script>
-    import { onMount } from 'svelte'
+    import { onMount, beforeUpdate } from 'svelte'
     import { frames } from '../js/stores'
     import Frame from './Frame.svelte'
 
-    onMount(() => switchFrames())
+    let switcher;
+    $: show = 1
 
-    $: show = 0
+    onMount(() => {
+        switcher = setTimeout(switchFrames, 1000)
+    })
 
     const switchFrames = () => {
-        show = show === 2 ? 0 : show + 1;
-        setTimeout(switchFrames, 1000)
+        if (show > $frames.length) show = 1
+        else show = show === $frames.length ? 1 : show + 1;
+        console.log(show)
+        switcher = setTimeout(switchFrames, 1000)
     }
 
 </script>
@@ -20,6 +25,8 @@
 <div class="flex-col">
     <h2>preview</h2>
     <div>
-        <Frame pixels={$frames[show]}/>
+        {#if $frames.length >= show}
+            <Frame pixels={$frames[show - 1]} preview={true}/>
+        {/if}
     </div>
 </div>

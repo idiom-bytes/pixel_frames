@@ -11,8 +11,8 @@
 
 <style>
 .board {
-  grid-template-columns: repeat(16, 35px);
-  grid-template-rows: repeat(16, 35px);
+    grid-template-columns: repeat(16, 35px);
+    grid-template-rows: repeat(16, 35px);
 }
 
 </style>
