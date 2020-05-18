@@ -6,8 +6,8 @@
 
 <style>
     .board {
-	    grid-template-columns: repeat(30, 3px);
-	    grid-template-rows: repeat(30, 3px);
+	    grid-template-columns: repeat(16, 5px);
+	    grid-template-rows: repeat(16, 5px);
     }
     .selected{
         border: 2px solid #b2d7b2;
