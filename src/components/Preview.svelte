@@ -13,7 +13,6 @@
     const switchFrames = () => {
         if (show > $frames.length) show = 1
         else show = show === $frames.length ? 1 : show + 1;
-        console.log(show)
         switcher = setTimeout(switchFrames, 1000)
     }
 
