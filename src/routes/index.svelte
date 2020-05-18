@@ -3,6 +3,7 @@
 	import Pallet from '../components/Pallet.svelte'
 	import Frames from '../components/Frames.svelte'
 	import Preview from '../components/Preview.svelte'
+	import ClearButton from '../components/ClearButton.svelte'
 </script>
 <style>
 .flex-col{
@@ -27,6 +28,7 @@
 	</div>
 	<Pallet />
 	<PixelBoard />
+	<ClearButton />
 </div>
 
 
