@@ -5,23 +5,7 @@ class WalletController {
         document.addEventListener('lamdenWalletInfo', (e) => this.events.emit('newInfo', e.detail))
     }
     getInfo(){
-        return new Promise((resolve, reject) => {
-            const handleGetInfo = (e) => {
-                console.log(e)
-                this.installed = true;
-                if (e.detail.errors) {
-                    reject(e.detail.errors)
-                }
-                else {
-                    this.info = e.detail;
-                    //this.events.emit('newInfo', e.detail)
-                    resolve(e.detail);
-                }
-                document.removeEventListener("lamdenWalletInfo", handleGetInfo);
-            }
-            document.addEventListener('lamdenWalletInfo', handleGetInfo, { once: true })
-            document.dispatchEvent(new CustomEvent('lamdenWalletGetInfo'));
-        })
+        document.dispatchEvent(new CustomEvent('lamdenWalletGetInfo'));
     }
     walletIsInstalled(){
         return new Promise((resolve, reject) => {

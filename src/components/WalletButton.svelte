@@ -16,24 +16,9 @@
     $: walletInfo = {}
 
 	onMount(async () => {
-        
-        walletController = new WalletController()
+        walletController = new WalletController();
         walletController.events.on('newInfo', handleMyEvent);
-		walletController.walletIsInstalled().then(res => {
-            installed = true
-			walletController.getInfo()
-				.then(res => {
-                    locked = res.locked
-                })
-				.catch(err => {
-				if (err[0].includes("lamdenWalletConnect")){
-					walletController.createConnection(connectionInfo)
-					walletController.sendConnection()
-						.then(res => console.log(res))
-						.catch(err => console.log(err))
-				}
-			})
-		})
+		walletController.walletIsInstalled().then(walletController.getInfo())
     })
 
     const handleMyEvent = (data) => {
@@ -48,7 +33,7 @@
 </script>
 
 <style>
-	.install-box{
+	button{
 		background: #461BC2;
 		color: #eae3ff;
         width: 213px;
@@ -58,19 +43,27 @@
         box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
         font-size: 1.3em;
 	}
-	.install-box:hover{
+	button:hover{
 		background: rgb(86, 41, 221);
 		box-shadow: 3px 3px 24px -10px rgba(0, 0, 0, 0.904);
+    }
+    button:focus{
+		outline: 0;
 	}
-	.install-box.installed{
+	button.installed{
 		background: #0fb40f;
+		color: #e0ffe0;
+    }
+    button.locked{
+		background: red;
 		color: #e0ffe0;
 	}
 </style>
 
 <button 
-    class="install-box flex-row" 
-    class:installed={installed} 
+    class=" flex-row" 
+    class:installed={installed}
+    class:locked={locked && installed} 
     on:click={() => openLink('https://chrome.google.com/webstore/detail/lamden-wallet-browser-ext/fhfffofbcgbjjojdnpcfompojdjjhdim')}>
     {#if installed}
         {#if locked}
