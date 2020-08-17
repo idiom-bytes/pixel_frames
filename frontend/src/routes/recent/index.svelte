@@ -11,10 +11,11 @@
 				variableName: 'S'
 			})
 		}
-		const res = await this.fetch(`${config.blockExplorer}/things/recent`, options)
+		const res = await this.fetch(`${config.blockExplorer}/things/recent?limit=40`, options)
 		let data = await res.json()
 		if (!data) data = []
-	    return {recent: data}
+		
+	    return {recent: data.filter(thing => !config.ownerBlacklist.includes(thing.owner) && !config.thingBlacklist.includes(thing.uid))}
 	}
 </script>
 
@@ -22,7 +23,7 @@
 	import { afterUpdate } from 'svelte'
     import Recent from '../../components/Recent.svelte'
 
-    export let recent;
+	export let recent;
 
 </script>
 

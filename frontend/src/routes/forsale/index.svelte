@@ -11,9 +11,10 @@
 				variableName: 'S'
 			})
 		}
-		const res = await this.fetch(`${config.blockExplorer}/things/forsale`, options)
+		const res = await this.fetch(`${config.blockExplorer}/things/forsale?limit=30`, options)
 		let data = await res.json()
-		if (!data) data = []
+		if (!data) data.data = []
+		data.data = data.data.filter(thing => !config.ownerBlacklist.includes(thing.owner) && !config.thingBlacklist.includes(thing.uid))
 	    return {forsale: data}
 	}
 </script>
